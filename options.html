@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        .b3-text-filed {
+            border: 1px solid #5f6368;
+            border-radius: 4px;
+            padding: 4px 8px;
+            line-height: 20px;
+            box-sizing: border-box;
+            color: #202124;
+            transition: border-color 120ms 0ms cubic-bezier(0, 0, 0.2, 1), box-shadow 120ms 0ms cubic-bezier(0, 0, 0.2, 1);
+            background-color: #f8f9fa;
+            width: 184px;
+        }
+
+        .b3-text-filed:hover {
+            border-color: #202124;
+        }
+
+        .b3-text-filed:focus {
+            outline: none;
+            border-color: #4285f4;
+            box-shadow: 0 0 0 3px rgba(66, 133, 244, 0.12);
+        }
+
+        .b3-switch {
+            flex-shrink: 0;
+            -webkit-appearance: none;
+            box-sizing: border-box;
+            width: 28px;
+            height: 12px;
+            border: 1px solid transparent;
+            border-radius: 7px;
+            margin: 0;
+            outline: none;
+            display: inline-block;
+            position: relative;
+            cursor: pointer;
+            background-color: rgba(0, 0, 0, .1);
+            overflow: inherit;
+            user-select: none;
+        }
+
+        .b3-switch:after {
+            box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);
+            box-sizing: border-box;
+            width: 16px;
+            height: 16px;
+            border: 1px solid #fff;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 1;
+            content: '';
+            background-color: #fff;
+            left: -4px;
+            top: -3px;
+            display: block;
+            position: absolute;
+            transition: transform .3s ease, opacity .2s;
+        }
+
+        .b3-switch:before {
+            content: '';
+            left: -14px;
+            right: initial;
+            top: -13px;
+            width: 36px;
+            height: 36px;
+            background-color: rgba(158, 158, 158, 0.12);
+            display: none;
+            border-radius: 24px;
+            position: absolute;
+            transition: transform .3s ease, opacity .2s;
+            opacity: .54;
+        }
+
+        .b3-switch:checked {
+            background-color: rgba(66, 133, 244, 0.54);
+        }
+
+        .b3-switch:checked:after {
+            background-color: #4285f4;
+            border-color: #4285f4;
+        }
+
+        .b3-switch:checked:before, .b3-switch:checked:after {
+            transform: translateX(19px);
+            transition: transform 0.6s cubic-bezier(0.2, 0.85, 0.32, 1.2), opacity 0.3s;
+        }
+
+        .b3-switch:disabled {
+            opacity: 0.38;
+            cursor: not-allowed;
+        }
+
+        .b3-switch:hover:not(:disabled):before, .b3-switch:focus:not(:disabled):before {
+            display: inline-block;
+        }
+
+        .b3-switch:focus:not(:disabled):before {
+            background-color: rgba(66, 133, 244, 0.12);
+        }
+
+        .b3-select {
+            border: 0;
+            border-radius: 4px;
+            padding: 4px 8px;
+            line-height: 20px;
+            box-sizing: border-box;
+            color: #202124;
+            transition: box-shadow 120ms 0ms cubic-bezier(0, 0, 0.2, 1);
+            background-color: #f8f9fa;
+            height: 28px;
+            font-size: 14px;
+            width: 184px;
+        }
+
+        .b3-select:focus {
+            box-shadow: 0 0 0 3px rgba(66, 133, 244, 0.38);
+        }
+
+        .b3-button {
+            width: 184px;
+            cursor: pointer;
+            color: #fff;
+            border-radius: 4px;
+            line-height: 20px;
+            padding: 4px 8px;
+            background-color: #4285f4;
+            white-space: nowrap;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            transition: box-shadow 280ms cubic-bezier(0.4, 0, 0.2, 1);
+            border: 0;
+            box-sizing: border-box;
+            text-align: center;
+        }
+
+        .b3-button:hover,
+        .b3-button:focus {
+            text-decoration: none;
+            box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2), 0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, .12);
+        }
+
+        .b3-button:active {
+            box-shadow: 0px 5px 5px -3px rgba(0, 0, 0, 0.2), 0px 8px 10px 1px rgba(0, 0, 0, 0.14), 0px 3px 14px 2px rgba(0, 0, 0, .12);
+        }
+    </style>
+</head>
+<body>
+<div style="max-width: 184px">
+    <div id="log" style="color: #d23f31;margin-bottom: 16px"></div>
+    <label style="display: flex;align-items: center;padding: 0 8px 16px 0;">
+        <div style="flex: 1">Show Tip</div>
+        <input class="b3-switch" id="showTip" checked type="checkbox">
+    </label>
+    <input id="ip" class="b3-text-filed" placeholder="SiYuan URL">
+    <div style="height: 16px;"></div>
+    <input id="token" class="b3-text-filed" placeholder="API token">
+    <div style="height: 16px;"></div>
+    <select class="b3-select" id="notebooks"></select>
+    <div style="height: 16px;"></div>
+    <button class="b3-button" id="send">Send to SiYuan</button>
+</div>
+<script src="lib/chrome-browser-polyfill.js"></script>
+<script src="lib/single-file-background.js"></script>
+<script src="popup.js"></script>
+
+</body>
+</html>

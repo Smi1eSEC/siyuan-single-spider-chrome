@@ -1,0 +1,71 @@
+{
+  "manifest_version": 3,
+  "minimum_chrome_version": "91",
+  "homepage_url": "https://github.com/siyuan-note/siyuan-chrome",
+  "action": {
+    "default_title": "SiYuan",
+    "default_popup": "options.html"
+  },
+  "icons": {
+    "128": "icon.png"
+  },
+  "content_scripts": [
+    {
+      "run_at": "document_start",
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "content.js",
+        "lib/Readability.js"
+      ]
+    },
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "run_at": "document_start",
+      "js": [
+        "lib/chrome-browser-polyfill.js",
+        "lib/single-file-frames.js",
+        "lib/single-file-extension-frames.js"
+      ],
+      "all_frames": true,
+      "match_about_blank": true
+    },
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "run_at": "document_start",
+      "js": [
+        "lib/chrome-browser-polyfill.js",
+        "lib/single-file-bootstrap.js",
+        "lib/single-file-extension-core.js",
+        "lib/single-file.js"
+      ],
+      "all_frames": false
+    }
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "web_accessible_resources": [{ 
+  "resources": ["lib/single-file-hooks-frames.js"],
+  "matches": ["http://*/*", "https://*/*"]
+}],
+  "permissions": [
+    "activeTab",
+    "scripting",
+    "contextMenus",
+    "clipboardWrite",
+    "storage"
+  ],
+  "host_permissions": [
+    "*://*/*"
+  ],
+  "name": "SiYuan",
+  "options_page": "options.html",
+  "description": "Web clipping for SiYuan. 思源笔记网页剪藏。",
+  "version": "1.1.14"
+}
