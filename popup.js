@@ -160,7 +160,7 @@ const { content, title, filename } = await singlefile.getPageData({
   scrollTo1(() => {
     toggle = false
     clearInterval(scrollTimer)
-    window.scrollTo(0, 0);
+    // window.scrollTo(0, 0);
     try {
       // 浏览器剪藏扩展剪藏某些网页代码块丢失注释 https://github.com/siyuan-note/siyuan/issues/5676
       document.querySelectorAll(".hljs-comment").forEach(item => {

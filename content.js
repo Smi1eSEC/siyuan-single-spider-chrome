@@ -162,22 +162,23 @@ let toggle = false;
 let scrollTimer;
 
 const scrollTo1 = (callback) => {
-  const onScroll = function () {
-    console.log(window.innerHeight, window.scrollY)
-    if (0 >= window.scrollY || window.innerHeight / 2 > window.scrollY) {
-      window.removeEventListener('scroll', onScroll)
-       callback()
-    }
-  }
+  // const onScroll = function () {
+  //   console.log(window.innerHeight, window.scrollY)
+  //   if (0 >= window.scrollY || window.innerHeight / 2 > window.scrollY) {
+  //     window.removeEventListener('scroll', onScroll)
+  //      callback()
+  //   }
+  // }
+  callback()
   console.log("scrollTo1");
-  window.addEventListener('scroll', onScroll)
-  onScroll()
+  // window.addEventListener('scroll', onScroll)
+  // onScroll()
   toggle = !toggle;
-  if (toggle) {
-    scrollTimer = setInterval(function () {
-      window.scrollBy(0, -window.innerHeight);
-    }, 666);
-  } else {
-    clearInterval(scrollTimer);
-  }
+  // if (toggle) {
+  //   scrollTimer = setInterval(function () {
+  //     window.scrollBy(0, -window.innerHeight);
+  //   }, 666);
+  // } else {
+  //   clearInterval(scrollTimer);
+  // }
 }
